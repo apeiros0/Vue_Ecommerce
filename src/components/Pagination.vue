@@ -50,6 +50,7 @@ export default {
   //   },
   methods: {
     getPage (page) {
+      if (page === this.pagination.current_page) return
       this.$emit('getPage', page)
     }
   },
