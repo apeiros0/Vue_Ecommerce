@@ -54,7 +54,10 @@ export default {
     }
   },
   computed: {
-    /* Vue 無法在 props 更新時，即時更新綁定的 data 屬性，會造成 props 雖然更新，但 data 卻無法更新的情況 (重新整理時，data 可能還會無法綁定資料) */
+    /* Vue 無法在 props 更新時，即時更新綁定的 data 屬性，
+       會造成 props 雖然更新，但 data 卻無法更新的情況 (重新整理時，data 可能還會無法綁定資料)
+       因此可以使用 computed 解決 data 無法即時更新的問題
+    */
     pagination () {
       return this.$props.pageData
     }
