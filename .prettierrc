@@ -1,0 +1,7 @@
+{
+  "formatOnSave": true,
+  "singleQuote": true,
+  "semi": false,
+  "arrowParens": "always",
+  "parser": "vue"
+}
