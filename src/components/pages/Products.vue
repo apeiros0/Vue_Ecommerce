@@ -19,8 +19,8 @@
         <tr v-for="item in products" :key="item.id">
           <td>{{ item.category }}</td>
           <td>{{ item.title }}</td>
-          <td class="text-right">{{ item.origin_price }}</td>
-          <td class="text-right">{{ item.price }}</td>
+          <td class="text-right">{{ item.origin_price | currency }}</td>
+          <td class="text-right">{{ item.price | currency }}</td>
           <td>
             <!-- 產品啟用 === 1 -->
             <span v-if="item.is_enabled === 1" class="text-success">啟用</span>
@@ -230,7 +230,8 @@ export default {
       status: {
         fileUpLoading: false
       },
-      pagination: {}
+      pagination: {},
+      page: 1
     }
   },
   components: {
@@ -241,6 +242,7 @@ export default {
   },
   methods: {
     getProducts (page = 1) {
+      this.page = page
       const api = `${process.env.API_PATH}/api/${process.env.CUSTONE_PATH}/admin/products?page=${page}`
       const self = this
       self.isLoading = true
@@ -283,10 +285,10 @@ export default {
         if (response.data.success) {
           /* 建立完產品資料後，關閉 Modal，並重新取得產品資料 */
           $('#productModal').modal('hide')
-          self.getProducts()
+          self.getProducts(this.page)
         } else {
           $('#productModal').modal('hide')
-          self.getProducts()
+          self.getProducts(this.page)
           this.$bus.$emit('message:push', '更新失敗', 'danger')
         }
       })
@@ -299,10 +301,10 @@ export default {
         if (response.data.success) {
           /* 建立完產品資料後，關閉 Modal，並重新取得產品資料 */
           $('#deleteModal').modal('hide')
-          self.getProducts()
+          self.getProducts(this.page)
         } else {
           $('#deleteModal').modal('hide')
-          self.getProducts()
+          self.getProducts(this.page)
           this.$bus.$emit('message:push', response.data.message, 'danger')
         }
       })
