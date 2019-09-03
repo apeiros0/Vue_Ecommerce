@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">後台管理</a>
       <input
         class="form-control form-control-dark w-100"
         type="text"
@@ -10,7 +10,7 @@
       />
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#" @click.prevent="signout">Sign out</a>
+          <a class="nav-link" href="#" @click.prevent="signout">登出</a>
         </li>
       </ul>
     </nav>
@@ -19,6 +19,17 @@
 
 <script>
 export default {
+  created () {
+    // const api = `${process.env.API_PATH}/api/user/check`
+    // /* 由於 this.$http 並不在 Vue 中，所以用 axios 取代 */
+    // this.$http.post(api).then((response) => {
+    //   console.log('check', response.data)
+    //   if (response.data.success) {
+    //     console.log(response.data)
+    //   } else {
+    //   }
+    // })
+  },
   methods: {
     signout () {
       const api = `${process.env.API_PATH}/logout`

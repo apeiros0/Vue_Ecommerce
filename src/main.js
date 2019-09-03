@@ -12,6 +12,7 @@ import App from './App'
 import router from './router'
 import './bus'
 import CurrencyFilter from './filters/currency'
+import timeFormatFilter from './filters/timeFormat'
 
 Vue.use(VueAxios, axios)
 
@@ -23,6 +24,7 @@ axios.defaults.withCredentials = true
 Vue.component('Loading', Loading)
 
 Vue.filter('currency', CurrencyFilter)
+Vue.filter('timeFormat', timeFormatFilter)
 
 new Vue({
   el: '#app',

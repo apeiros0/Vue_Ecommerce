@@ -44,7 +44,7 @@
       </tbody>
     </table>
 
-    <Pagination :page-data="pagination" @getPage="getProducts"></Pagination>
+    <Pagination :pagination="pagination" @getPage="getProducts"></Pagination>
 
     <!-- Add & Edit Modal -->
     <div
@@ -58,7 +58,8 @@
         <div class="modal-content border-0">
           <div class="modal-header bg-dark text-white">
             <h5 class="modal-title" id="exampleModalLabel">
-              <span>新增產品</span>
+              <span v-if="isNew">新增產品</span>
+              <span v-else>編輯產品</span>
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -285,11 +286,11 @@ export default {
         if (response.data.success) {
           /* 建立完產品資料後，關閉 Modal，並重新取得產品資料 */
           $('#productModal').modal('hide')
-          self.getProducts(this.page)
+          self.getProducts(self.page)
         } else {
           $('#productModal').modal('hide')
-          self.getProducts(this.page)
-          this.$bus.$emit('message:push', '更新失敗', 'danger')
+          self.getProducts(self.page)
+          self.$bus.$emit('message:push', '更新失敗', 'danger')
         }
       })
     },
@@ -304,8 +305,8 @@ export default {
           self.getProducts(this.page)
         } else {
           $('#deleteModal').modal('hide')
-          self.getProducts(this.page)
-          this.$bus.$emit('message:push', response.data.message, 'danger')
+          self.getProducts(self.page)
+          self.$bus.$emit('message:push', response.data.message, 'danger')
         }
       })
     },
@@ -342,6 +343,4 @@ export default {
   }
 }
 </script>
-<style>
-@import url("@fortawesome/fontawesome-free/css/all.css");
-</style>
+<style scoped></style>
